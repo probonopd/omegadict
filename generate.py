@@ -79,7 +79,7 @@ for combination in combinations:
     run("")
     code = """sed -ie 's|\\\\ | |g' %L1-%L2.chemnitz.temp"""
     code = code.replace("%L1", combination[0]).replace("%L2", combination[1])
-    run(code)
+    ###run(code)
     run("")
     filename = ""+combination[0]+"-"+combination[1]+".chemnitz"
     f = open(filename + ".temp", "r")
