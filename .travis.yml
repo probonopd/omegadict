@@ -9,3 +9,4 @@ script:
   - gunzip omegawiki-lexical.sql.gz
   - file omegawiki-lexical.sql
   - mysql -u root -h 127.0.0.1 < omegawiki-lexical.sql
+  - ls
