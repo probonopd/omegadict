@@ -1,3 +1,9 @@
+sudo: false
+
+cache:
+  directories:
+    - $HOME/cache
+    
 # https://docs.travis-ci.com/user/database-setup/#MySQL
 # MySQL binds to 127.0.0.1 and requires authentication. Username “root” and a blank password.
 
@@ -5,8 +11,12 @@ services:
   - mysql
   
 script:
+  - mkdir cache
+  - cd cache/
   - wget -q -c "http://www.omegawiki.org/downloads/omegawiki-lexical.sql.gz"
   - gunzip omegawiki-lexical.sql.gz
   - file omegawiki-lexical.sql
-  - mysql -u root -h 127.0.0.1 < omegawiki-lexical.sql
-  - ls
+  - echo "create database omega" | mysql -u root
+  - mysql omega -u root -h 127.0.0.1 < omegawiki-lexical.sql
+  - cd ..
+  - find cache/
