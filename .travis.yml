@@ -2,7 +2,7 @@ sudo: false
 
 cache:
   directories:
-    - $HOME/cache
+    - cache/
     
 # https://docs.travis-ci.com/user/database-setup/#MySQL
 # MySQL binds to 127.0.0.1 and requires authentication. Username “root” and a blank password.
