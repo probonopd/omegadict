@@ -42,7 +42,7 @@ and language_names.language_id = uw_expression.language_id
 and language_names.name_language_id = '85'
 group by defined_meaning_id
 order by %L1
-INTO OUTFILE '%L1-%L2.chemnitz.temp'
+INTO OUTFILE '%FILE'
 FIELDS TERMINATED BY ' :: '
 LINES TERMINATED BY '\\n'
 ;"
@@ -73,7 +73,7 @@ for combination in combinations:
     except:
         pass
     run("# %s - %s" % (combination[0], combination[1]))
-    code = sqlcode.replace("%L1", os.path.abspath(os.getcwd()) + "/" + combination[0]).replace("%L2", combination[1])
+    code = sqlcode.replace("%L1", combination[0]).replace("%L2", combination[1]).replace("%FILE", os.path.abspath(os.getcwd()) + "/" + combination[0] + "-" + combination[1] + ".chemnitz.temp")
     code = code.replace("%O1", get_language_name_omegawiki(combination[0])).replace("%O2", get_language_name_omegawiki(combination[1]))
     run(code)
     run("")
