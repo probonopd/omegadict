@@ -12,3 +12,5 @@ services:
   
 script:
   - bash -ex import_database.sh
+  - ./generate.py
+  - find .
