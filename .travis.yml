@@ -15,4 +15,5 @@ script:
   # Allow mysql to write into the directory; fix ERROR 1 (HY000)
   - chmod -R 777 .
   - python2.7 generate.py
-  - find .
+  - find . -name "*.quickdic" -exec bash -e bintray.sh {} \; 
+  - find . -name "*.html" -exec bash -e bintray.sh {} \; 
