@@ -117,4 +117,7 @@ for rlanguage in languages:
         html += '<td>' + cell + '</td>'
     html += '</tr>'
 html += '</table>'
-print html
+
+myfile = open(os.path.abspath(os.getcwd()) + "/" + "index.html", "w")
+myfile.write(html)
+myfile.close()
