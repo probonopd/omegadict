@@ -11,12 +11,4 @@ services:
   - mysql
   
 script:
-  - mkdir cache
-  - cd cache/
-  - wget -q -c "http://www.omegawiki.org/downloads/omegawiki-lexical.sql.gz"
-  - gunzip omegawiki-lexical.sql.gz
-  - file omegawiki-lexical.sql
-  - echo "create database omega" | mysql -u root
-  - mysql omega -u root -h 127.0.0.1 < omegawiki-lexical.sql
-  - cd ..
-  - find cache/
+  - bash -ex import_database.sh
