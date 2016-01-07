@@ -42,7 +42,7 @@ and language_names.language_id = uw_expression.language_id
 and language_names.name_language_id = '85'
 group by defined_meaning_id
 order by %L1
-INTO OUTFILE '/tmp/%L1-%L2.chemnitz.temp'
+INTO OUTFILE '%L1-%L2.chemnitz.temp'
 FIELDS TERMINATED BY ' :: '
 LINES TERMINATED BY '\\n'
 ;"
@@ -55,7 +55,7 @@ javacode = """java -Xmx512m -jar DictionaryBuilder.jar \
 --lang1Stoplist=%S1ST.txt \
 --lang2Stoplist=%S2ST.txt \
 --dictInfo="" \
---input1=/tmp/%L1-%L2.chemnitz \
+--input1=%L1-%L2.chemnitz \
 --input1Name="" \
 --input1Charset=UTF8 \
 --input1Format=chemnitz \
@@ -69,7 +69,7 @@ for language in languages:
 for combination in combinations:
     print(combination)
     try:
-        os.remove('/tmp/%L1-%L2.chemnitz.temp'.replace("%L1", combination[0]).replace("%L2", combination[1]))
+        os.remove('%L1-%L2.chemnitz.temp'.replace("%L1", combination[0]).replace("%L2", combination[1]))
     except:
         pass
     run("# %s - %s" % (combination[0], combination[1]))
@@ -77,11 +77,11 @@ for combination in combinations:
     code = code.replace("%O1", get_language_name_omegawiki(combination[0])).replace("%O2", get_language_name_omegawiki(combination[1]))
     run(code)
     run("")
-    code = """sed -ie 's|\\\\ | |g' /tmp/%L1-%L2.chemnitz.temp"""
+    code = """sed -ie 's|\\\\ | |g' %L1-%L2.chemnitz.temp"""
     code = code.replace("%L1", combination[0]).replace("%L2", combination[1])
     run(code)
     run("")
-    filename = "/tmp/"+combination[0]+"-"+combination[1]+".chemnitz"
+    filename = ""+combination[0]+"-"+combination[1]+".chemnitz"
     f = open(filename + ".temp", "r")
     lines = set(f.readlines()) # sort, uniq
     f.close()
@@ -108,7 +108,7 @@ for rlanguage in languages:
     html += '<tr><td>' + rlanguage + '</td>'
     for clanguage in languages:
         quickdic_file = clanguage + "-" + rlanguage + ".quickdic"
-        chemnitz_file = "/tmp/" + clanguage + "-" + rlanguage + ".chemnitz"
+        chemnitz_file = "" + clanguage + "-" + rlanguage + ".chemnitz"
         if "%s-%s" % (clanguage, rlanguage) in combination_strings:
             num_lines = int(sum(1 for line in open(chemnitz_file)))/1000
             cell = "<a href='%s'>%s-%s</a><br>%s" %(quickdic_file, get_isocode(clanguage), get_isocode(rlanguage), num_lines)
