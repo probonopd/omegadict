@@ -61,7 +61,7 @@ javacode = """java -Xmx512m -jar DictionaryBuilder.jar \
 --input1Format=chemnitz \
 --input1FlipColumns=false"""
 
-#run("wget -c -q http://dictionarypc.quickdic-dictionary.googlecode.com/git/custom_dictionary/DictionaryBuilder.jar")
+run("wget -c -q https://github.com/rdoeffinger/DictionaryPC/raw/master/custom_dictionary/DictionaryBuilder.jar")
 
 for language in languages:
     run("wget -c -q http://members.unine.ch/jacques.savoy/clef/%sST.txt" % language.lower())
